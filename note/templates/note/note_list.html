@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 18px;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .note-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .note {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .note:last-child {
+            border-bottom: none;
+        }
+
+        .note-title {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .note-timestamp {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .note-content {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .no-notes {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Note List</h1>
+    <a href="{% url 'note:add_note' %}">Add a New Note</a>
+    <div class="note-container">
+        {% for note in notes %}
+            <div class="note">
+                <div>
+                    <div class="note-title">{{ note.title }}</div>
+                    <div class="note-timestamp">{{ note.timestamp }}</div>
+                    <div class="note-content">{{ note.note }}</div>
+                </div>
+                <form method="post" action="{% url 'note:delete_note' note.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </div>
+        {% empty %}
+            <div class="no-notes">No notes yet.</div>
+        {% endfor %}
+    </div>
+</body>
+</html>
