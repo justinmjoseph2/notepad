@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'notepad.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'notepad',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',  # Set to your PostgreSQL host, e.g., 'localhost' or an IP address
-        'PORT': '5432',       # Default PostgreSQL port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
