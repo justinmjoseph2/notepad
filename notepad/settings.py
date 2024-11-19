@@ -126,5 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://notepad-c06w.onrender.com'
+    'https://notepad-ojos.onrender.com',
+    # add any other trusted domains here
 ]
+
